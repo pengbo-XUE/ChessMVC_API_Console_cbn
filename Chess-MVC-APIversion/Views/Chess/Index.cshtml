@@ -1,0 +1,153 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@{
+
+    var display = Global.displayMsg;
+    Chess thisChess = Global.chess;
+
+
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <style>
+
+            .chess-board h1 {
+                text-align:center;
+            }
+            .chess-board {
+                border-spacing: 0;
+                border-collapse: collapse;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            .chess-board th {
+                padding: .5em;
+            }
+
+            .chess-board td {
+                border: 1px solid;
+                width: 6em;
+                height: 6em;
+            }
+
+            .chess-board .light {
+                background: #fbb534;
+            }
+
+            .chess-board .dark {
+                background: #174d86;
+            }
+            #nav__btn {
+                width: 10em !important;
+                margin-left: 44% !important;
+                margin-right: auto !important;
+                margin-top: 10px;
+                padding: 5px,10px;
+                margin-top: 10px;
+                border: solid,black,1px;
+                border-radius: 3px;
+            }
+
+            #button {
+                width: 6em;
+                height: 6em;
+            }
+    </style>
+</head>
+<body>
+    <h1 id="dis-txt">@display</h1>
+    <table class="chess-board">
+        <tbody>
+            <tr>
+                <th></th>
+                <th>a</th>
+                <th>b</th>
+                <th>c</th>
+                <th>d</th>
+                <th>e</th>
+                <th>f</th>
+                <th>g</th>
+                <th>h</th>
+            </tr>
+            @using (Html.BeginForm("HandleClick", "Chess"))
+            {
+                @for (int i = 0; i <= 7; i++)
+                {
+
+                    <tr>
+                        <th>@(i + 1)</th>
+                        @for (int j = 0; j <= 7; j++)
+                        {
+                            string piece = "~/images/" + thisChess.game_board[j, i] + ".png";
+                            string color;
+                            if ((j % 2 == 0 && i % 2 == 0) || (j % 2 != 0 && i % 2 != 0))
+                            {
+                                color = "light";
+                            }
+                            else color = "dark";
+
+
+                            int[] ary = { j, i };
+
+                            string str = "";
+                            foreach (int k in ary)
+                            {
+                                str = str + k.ToString() + " ";
+                                str = str.TrimEnd();
+                            }
+
+                            if (thisChess.game_board[j, i] == null)
+                            {
+
+                                <td class=@color>
+                                    <button type="submit" class="@color" id="button" name="chess" value=@str></button>
+                                </td>
+
+                            }
+                            else
+                            {
+                                <td class=@color>
+                                    <button type="submit" class="@color" id="button" name="chess" value=@str>
+                                        <img id="piece" src=@piece alt="Alternate Text" asp-append-version="true" />
+                                    </button>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @using (Html.BeginForm("HandleReset", "Chess"))
+    {
+        <button type="submit" name="reset" id="nav__btn" class="navbar__btn" value="reset">reset</button>
+    }
+
+</body>
+</html>
+
+
+@*<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Link)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id
+}) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
+*@

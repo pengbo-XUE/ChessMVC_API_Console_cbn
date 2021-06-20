@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<body>
+    <div id="home-page">
+        <h1>
+            ASP.NET CORE MVC with REST API
+        </h1>
+        <p>
+            This a version of my Chess game that generates this front end using MVC and bootstrap, the back end logic of the App is running on a rest API, the apps communicate to each other using JSON.
+        </p>
+        <p>
+            To start the game you'll have to register an account and confirm it in your email, the email confirmation service is provided by SendGrid API.
+        </p>
+        <h2>
+            Technologies used:
+        </h2>
+        <Ul>
+            <li>ASP.NET CORE 5.0.1 MVC</li>
+            <li>ASP.NET CORE RESTFUL API</li>
+            <li>Bootstrap 5</li>
+            <li>Javascript</li>
+            <li>SendGrid(email comfirmation)</li>
+            <li>Postman(testing API)</li>
+        </Ul>
+        @using (Html.BeginForm("StartChess", "Chess"))
+        {
+            <button type="submit" name="reset" id="nav__btn" class="navbar__btn" value="reset">START GAME</button>
+        }
+    </div>
+</body>
+<style>
+    p {
+        font-weight: bold;
+    }
+
+    #home-page {
+        margin-top: 150px;
+    }
+
+    ul {
+        margin-bottom: 150px;
+    }
+
+    #nav__btn {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
